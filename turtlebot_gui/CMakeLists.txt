@@ -5,7 +5,7 @@ project(turtlebot_gui)
 find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs genmsg)
 
 ## Find QT packages
-find_package(Qt5 REQUIRED COMPONENTS Core Widgets)
+find_package(Qt5 REQUIRED COMPONENTS Core Widgets DataVisualization)
 
 ## Enable QT
 # Make the uic, moc, and rcc Qt components be run automatically
@@ -35,5 +35,6 @@ target_link_libraries(display_ui
     ${catkin_LIBRARIES}
     Qt5::Core
     Qt5::Widgets
+    Qt5::DataVisualization
     )
 add_dependencies(display_ui turtlebot_gui_generate_messages_cpp)

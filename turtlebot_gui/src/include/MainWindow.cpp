@@ -1,7 +1,8 @@
 #include <QtWidgets>
 #include "MainWindow.h"
+#include <ros/ros.h>
 
-MainWindow::MainWindow(){    
+MainWindow::MainWindow(ros::NodeHandle& nh){    
     /*
     ===========================================================
     Description: 

@@ -2,12 +2,14 @@
 
 #include <QMainWindow>
 #include <QDesktopWidget>
+#include <Q3DScatter>
+#include <ros/ros.h>
 
 class MainWindow : public QMainWindow{
     Q_OBJECT //enables use of signals and slots
 
     public:
-        MainWindow();
+        MainWindow(ros::NodeHandle& nh);
 
     private slots: //QT slots (functions that are connected to)
 
