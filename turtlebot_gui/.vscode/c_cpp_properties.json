@@ -1,0 +1,17 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "C:\\Users\\Becca\\anaconda3\\envs\\ros_env\\Library\\include\\**",
+        "C:\\Users\\Becca\\Documents\\catkin_ws\\src\\simple_ros\\include\\**",
+        "C:\\Users\\Becca\\Documents\\catkin_ws\\src\\ROS_Visualizer_GUI\\turtlebot_gui\\include\\**"
+      ],
+      "name": "ROS"
+    }
+  ],
+  "version": 4
+}
