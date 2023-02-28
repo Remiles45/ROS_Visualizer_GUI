@@ -11,7 +11,7 @@ class PointCloudViewer_W : public QWidget{
         PointCloudViewer_W(ros::NodeHandle& nh);
     private:
         void pointCloudCallback(const sensor_msgs::PointCloudConstPtr&);
-
+        void rosSpin(void);
         QtDataVisualization::Q3DScatter *scatter_plot;
     protected:
         ros::NodeHandle nh_;

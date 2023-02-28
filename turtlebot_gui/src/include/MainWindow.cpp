@@ -21,7 +21,9 @@ MainWindow::MainWindow(ros::NodeHandle& nh) : nh_(nh){
 
     setWindowTitle("Turtlebot Data Viewer");
 
+    QWidget *container = QWidget::createWindowContainer(pcl_viewer_widget);
 
+    setCentralWidget(container);
 }
 
 
