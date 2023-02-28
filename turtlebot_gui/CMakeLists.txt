@@ -30,6 +30,8 @@ add_executable(display_ui
     src/main.cpp
     src/include/MainWindow.h
     src/include/MainWindow.cpp
+    src/include/PCViewerWidget.h
+    src/include/PCViewerWidget.cpp
     )
 target_link_libraries(display_ui 
     ${catkin_LIBRARIES}

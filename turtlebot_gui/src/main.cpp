@@ -10,9 +10,9 @@ int main(int argc, char *argv[])
 
     // Create the Application and display the Gui window
     QApplication app(argc, argv);
-    MainWindow turtle_gui;
+    MainWindow turtle_gui(nh);
+
     turtle_gui.show();
-
-
+    ros::spinOnce();
     return app.exec();
 }

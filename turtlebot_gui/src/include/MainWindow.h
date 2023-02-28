@@ -2,17 +2,14 @@
 
 #include <QMainWindow>
 #include <QDesktopWidget>
-#include <Q3DScatter>
 #include <ros/ros.h>
+#include "PCViewerWidget.h"
 
 class MainWindow : public QMainWindow{
     Q_OBJECT //enables use of signals and slots
 
     public:
         MainWindow(ros::NodeHandle& nh);
-
-    private slots: //QT slots (functions that are connected to)
-
 
     private:
         // void createActions();
@@ -24,4 +21,7 @@ class MainWindow : public QMainWindow{
         QDesktopWidget *displayScreen;
         QMenu *fileMenu;
 
+        PointCloudViewer_W pcl_viewer_widget(ros::NodeHandle& nh);
+    protected: 
+        ros::NodeHandle nh_;
 };

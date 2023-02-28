@@ -2,7 +2,7 @@
 #include "MainWindow.h"
 #include <ros/ros.h>
 
-MainWindow::MainWindow(ros::NodeHandle& nh){    
+MainWindow::MainWindow(ros::NodeHandle& nh) : nh_(nh){    
     /*
     ===========================================================
     Description: 
@@ -22,6 +22,6 @@ MainWindow::MainWindow(ros::NodeHandle& nh){
     setWindowTitle("Turtlebot Data Viewer");
 
 
-        
-};
+}
+
 
