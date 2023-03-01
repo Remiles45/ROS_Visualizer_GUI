@@ -2,17 +2,17 @@
 #include <ros/ros.h>
 #include "sensor_msgs/PointCloud.h"
 #include <QtWidgets>
-#include <QtDataVisualization>
+// #include <QtDataVisualization>
 
 class PointCloudViewer_W : public QWidget{
     Q_OBJECT
 
     public: 
-        PointCloudViewer_W(ros::NodeHandle& nh);
+        PointCloudViewer_W(ros::NodeHandle& nh, QWidget* parent = nullptr);
     private:
         void pointCloudCallback(const sensor_msgs::PointCloudConstPtr&);
         void rosSpin(void);
-        QtDataVisualization::Q3DScatter *scatter_plot;
+        // QtDataVisualization::Q3DScatter *scatter_plot;
     protected:
         ros::NodeHandle nh_;
         sensor_msgs::PointCloud curr_cloud;
