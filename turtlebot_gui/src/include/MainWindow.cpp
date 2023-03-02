@@ -1,10 +1,8 @@
-// #include <QtWidgets>
 #include "MainWindow.h"
-// #include <ros/ros.h>
 
 MainWindow::MainWindow(ros::NodeHandle& nh, QWidget* parent) : 
     QMainWindow(parent),
-    nh_(nh)// do I need to pass node handle into here?
+    nh_(nh)
 {    
     /*
     ===========================================================
@@ -22,13 +20,18 @@ MainWindow::MainWindow(ros::NodeHandle& nh, QWidget* parent) :
     this->setFixedSize(QSize(screenSize.width()*0.25f,screenSize.height()*0.5f));
 
     setWindowTitle("Turtlebot Data Viewer");
-    // pcl_viewer_widget;//(ros::NodeHandle& nh);
-    // setCentralWidget(pcl_viewer_widget);
-    createWidgets(nh);
+
+    spinTimer = new QTimer(this);
+    connect(spinTimer, &QTimer::timeout, this, &ros::spinOnce);
+    spinTimer->start(1); // add msec interval into start declaration if desired. with 0 interval it will call as soon as all events in the window systems event queue have been processed.
+    createWidgets();
 }
 
-void MainWindow::createWidgets(ros::NodeHandle& nh){
-    // QDockWidget *dock = new QDockWidget(PointCloudViewer_W(nh));
-    auto pcl_viewer_w = new PointCloudViewer_W(nh,this);
-    setCentralWidget(pcl_viewer_w);
+MainWindow::~MainWindow(){
+    spinTimer->stop();
+}
+
+void MainWindow::createWidgets(){
+    LaserScanViewer_W *lscan_viewer_w = new LaserScanViewer_W(nh_,this);
+    setCentralWidget(lscan_viewer_w);
 }

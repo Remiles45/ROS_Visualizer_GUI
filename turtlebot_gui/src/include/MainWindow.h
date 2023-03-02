@@ -3,14 +3,15 @@
 #include <QMainWindow>
 #include <QDesktopWidget>
 #include <ros/ros.h>
-#include "PCViewerWidget.h"
-#include <QDockWidget>
+#include "LScanViewerWidget.h"
+#include <QTimer>
 
 class MainWindow : public QMainWindow{
     Q_OBJECT //enables use of signals and slots
 
     public:
         MainWindow(ros::NodeHandle& nh, QWidget* parent = nullptr);
+        ~MainWindow();
 
     private:
         //std::unique_ptr is a smart pointer that owns and manages
@@ -19,12 +20,13 @@ class MainWindow : public QMainWindow{
         // std::unique_ptr<MainWindow> ui; 
         // void createActions();
         // void createMenus();
-        void createWidgets(ros::NodeHandle& nh);
-        
+        void createWidgets();
+
         int windowWidth;
         int windowHeight;
         QDesktopWidget *displayScreen;
         QMenu *fileMenu;
+        QTimer *spinTimer;
 
         
     protected: 

@@ -5,7 +5,7 @@
 int main(int argc, char *argv[])
 {   
     // Initialize the ros node
-    ros::init(argc, argv, "listener");
+    ros::init(argc, argv, "turtlebot_gui");
     ros::NodeHandle nh;
 
     // Create the Application and display the Gui window
@@ -13,6 +13,5 @@ int main(int argc, char *argv[])
     MainWindow turtle_gui(nh);
 
     turtle_gui.show();
-    ros::spinOnce();
     return app.exec();
 }
