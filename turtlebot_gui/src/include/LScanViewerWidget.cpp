@@ -57,7 +57,6 @@ void LaserScanViewer_W::repaintScan(){
     // Create a scatter series in which we will store all of the datapoints that 
     // the laser scan has collected. 
     QScatterSeries *scan_data = new QScatterSeries(); 
-    scan_data->setName("Laser Scan");
     scan_data->setMarkerShape(QScatterSeries::MarkerShapeCircle);
     scan_data->setMarkerSize(10.0);
 
@@ -78,5 +77,7 @@ void LaserScanViewer_W::repaintScan(){
     // update plot size according to the data that was received
     // may want to make this smarter in the future
     scatter_plot_m->createDefaultAxes();
-    viewer->repaint();
+    viewer->update();//repaint();
 }
+
+// LaserScanViewer_W::
