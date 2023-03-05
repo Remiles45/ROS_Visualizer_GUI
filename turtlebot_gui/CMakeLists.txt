@@ -30,8 +30,12 @@ add_executable(display_ui
     src/main.cpp
     src/include/MainWindow.h
     src/include/MainWindow.cpp
-    src/include/LScanViewerWidget.h
-    src/include/LScanViewerWidget.cpp
+    src/include/ViewerWidget.h
+    src/include/ViewerWidget.cpp
+    src/include/PlotOptionsWidget.h
+    src/include/PlotOptionsWidget.cpp
+    src/include/RosTranslation.h
+    src/include/RosTranslation.cpp
     )
 target_link_libraries(display_ui 
     ${catkin_LIBRARIES}

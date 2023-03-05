@@ -3,7 +3,9 @@
 #include <QMainWindow>
 #include <QDesktopWidget>
 #include <ros/ros.h>
-#include "LScanViewerWidget.h"
+#include "ViewerWidget.h"
+// #include "PlotOptionsWidget.h"
+#include "RosTranslation.h"
 #include <QTimer>
 
 class MainWindow : public QMainWindow{

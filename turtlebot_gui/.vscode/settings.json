@@ -97,6 +97,9 @@
         "xutility": "cpp",
         "q3dscatter": "cpp",
         "qdesktopwidget": "cpp",
-        "qtcharts": "cpp"
+        "qtcharts": "cpp",
+        "*.tcc": "cpp",
+        "string_view": "cpp",
+        "numbers": "cpp"
     }
 }

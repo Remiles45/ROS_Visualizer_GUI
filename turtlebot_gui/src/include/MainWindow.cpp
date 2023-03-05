@@ -32,6 +32,18 @@ MainWindow::~MainWindow(){
 }
 
 void MainWindow::createWidgets(){
-    LaserScanViewer_W *lscan_viewer_w = new LaserScanViewer_W(nh_,this);
-    setCentralWidget(lscan_viewer_w);
+    QHBoxLayout *main_layout = new QHBoxLayout();
+    QWidget *main_widget = new QWidget();
+
+    RosTranslation *ros_translation = new RosTranslation(nh_,this);
+    Viewer_W *lscan_viewer_w = new Viewer_W(this);
+
+    main_layout->addWidget(lscan_viewer_w);
+    // main_layout->addWidget(options_w);
+    main_widget->setLayout(main_layout);
+    setCentralWidget(main_widget);
+
+
+    QObject::connect(ros_translation, SIGNAL(laserScanValueChanged(std::vector<std::vector<float>>&)), lscan_viewer_w, SLOT(updateData(std::vector<std::vector<float>>&)));
+ 
 }
