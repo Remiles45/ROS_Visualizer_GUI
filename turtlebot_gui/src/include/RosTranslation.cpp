@@ -1,11 +1,12 @@
 #include "RosTranslation.h"
+#include <iostream>
 
 RosTranslation::RosTranslation(ros::NodeHandle& nh, QWidget *parent) : 
-    nh_(nh) ,
+    nh_m(nh) ,
     QWidget(parent)
 {
     // create the subscriber
-    lscan_sub = nh_.subscribe("base_scan",3,&RosTranslation::updateScanData,this);
+    // lscan_sub = nh_.subscribe("base_scan",3,&RosTranslation::updateScanData,this);
     ROS_INFO("created ros translation");   
 }
 
@@ -45,4 +46,9 @@ void RosTranslation::updateScanData(const sensor_msgs::LaserScan& laser_scan_msg
         angle += angle_inc;
     }
     emit laserScanValueChanged(out_scan);
+}
+
+void RosTranslation::addSubscriber(std::string& sub){
+    lscan_sub_m = nh_m.subscribe(sub,3,&RosTranslation::updateScanData,this);
+    // subscriber_watchdog = new QTimer(this)
 }

@@ -12,7 +12,7 @@ Viewer_W::Viewer_W(QWidget* parent) :
     scatter_plot_m = new QChart();
     viewer = new QChartView(scatter_plot_m);
     QHBoxLayout *hLayout = new QHBoxLayout(this);
-    hLayout->addWidget(viewer,1);
+    hLayout->addWidget(viewer,4);
     
     // start a timer to repaint the plot every 250 mS
     repaintTimer = new QTimer(this);
@@ -83,3 +83,4 @@ void Viewer_W::setMarkerSize(float size){
     marker_size_m = size;
     scan_data_m->setMarkerSize(marker_size_m);
 }
+

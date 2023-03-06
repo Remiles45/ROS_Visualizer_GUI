@@ -32,8 +32,8 @@ add_executable(display_ui
     src/include/MainWindow.cpp
     src/include/ViewerWidget.h
     src/include/ViewerWidget.cpp
-    src/include/PlotOptionsWidget.h
-    src/include/PlotOptionsWidget.cpp
+    src/include/AddSubscriberWidget.h
+    src/include/AddSubscriberWidget.cpp
     src/include/RosTranslation.h
     src/include/RosTranslation.cpp
     )

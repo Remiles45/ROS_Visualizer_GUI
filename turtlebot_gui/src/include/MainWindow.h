@@ -4,9 +4,10 @@
 #include <QDesktopWidget>
 #include <ros/ros.h>
 #include "ViewerWidget.h"
-// #include "PlotOptionsWidget.h"
+#include "AddSubscriberWidget.h"
 #include "RosTranslation.h"
 #include <QTimer>
+#include <QSpacerItem>
 
 class MainWindow : public QMainWindow{
     Q_OBJECT //enables use of signals and slots

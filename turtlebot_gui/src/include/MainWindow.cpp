@@ -14,10 +14,10 @@ MainWindow::MainWindow(ros::NodeHandle& nh, QWidget* parent) :
         in all of the corresponding widgets.
     ===========================================================
     */
-    // set the default size of the window to 25% of the available screen width 
-    // and 50% of the available screen height
+    // set the default size of the window to 50% of the available screen width 
+    // and 75% of the available screen height
     QRect screenSize = displayScreen->availableGeometry(this);
-    this->setFixedSize(QSize(screenSize.width()*0.25f,screenSize.height()*0.5f));
+    this->setFixedSize(QSize(screenSize.width()*0.5f,screenSize.height()*0.75f));
 
     setWindowTitle("Turtlebot Data Viewer");
 
@@ -32,18 +32,20 @@ MainWindow::~MainWindow(){
 }
 
 void MainWindow::createWidgets(){
-    QHBoxLayout *main_layout = new QHBoxLayout();
+    QGridLayout *main_layout = new QGridLayout();
     QWidget *main_widget = new QWidget();
 
     RosTranslation *ros_translation = new RosTranslation(nh_,this);
     Viewer_W *lscan_viewer_w = new Viewer_W(this);
-
-    main_layout->addWidget(lscan_viewer_w);
-    // main_layout->addWidget(options_w);
+    AddSubscriber_W *add_sub_w = new AddSubscriber_W(this);
+    // QSpacerItem *spacer = new QSpacerItem(1,2);
+    main_layout->addWidget(lscan_viewer_w,1,0);
+    main_layout->addWidget(add_sub_w,0,0);
     main_widget->setLayout(main_layout);
     setCentralWidget(main_widget);
 
-
+    // Connect signals and slots
     QObject::connect(ros_translation, SIGNAL(laserScanValueChanged(std::vector<std::vector<float>>&)), lscan_viewer_w, SLOT(updateData(std::vector<std::vector<float>>&)));
+    QObject::connect(add_sub_w, SIGNAL(addSubSignal(std::string&)), ros_translation, SLOT(addSubscriber(std::string&)));
  
 }

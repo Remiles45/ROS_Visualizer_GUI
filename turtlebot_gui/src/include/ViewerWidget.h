@@ -5,8 +5,8 @@
 #include <QtCharts>
 #include <cmath>
 #include <QTimer>
-
-#include <iostream>
+#include <QString>
+// #include <iostream>
 
 class Viewer_W : public QWidget{
     Q_OBJECT
