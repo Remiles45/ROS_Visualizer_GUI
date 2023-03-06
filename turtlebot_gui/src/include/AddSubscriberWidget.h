@@ -17,6 +17,7 @@ class AddSubscriber_W : public QWidget{
         QHBoxLayout *hLayout;
         QLineEdit *subscriber_name_entry;
         QPushButton *add_subscriber_btn;
+
     signals:
         void addSubSignal(std::string&);
 };

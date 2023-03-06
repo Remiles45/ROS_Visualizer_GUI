@@ -83,4 +83,3 @@ void Viewer_W::setMarkerSize(float size){
     marker_size_m = size;
     scan_data_m->setMarkerSize(marker_size_m);
 }
-

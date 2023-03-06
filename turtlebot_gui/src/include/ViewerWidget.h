@@ -6,7 +6,6 @@
 #include <cmath>
 #include <QTimer>
 #include <QString>
-// #include <iostream>
 
 class Viewer_W : public QWidget{
     Q_OBJECT
@@ -22,7 +21,6 @@ class Viewer_W : public QWidget{
         void updateData(std::vector<std::vector<float>>&);
 
     private:
-        // void LaserScanCallback(const sensor_msgs::LaserScan&);
         void repaintScan();
         void updatePlotArea();
         void addDataToSeries();
@@ -33,14 +31,7 @@ class Viewer_W : public QWidget{
         QTimer *repaintTimer;
 
         float marker_size_m=5.0f;
-        QScatterSeries *scan_data_m;
+        QScatterSeries *scan_data_m = nullptr;
         std::vector<std::vector<float>> raw_data_m;
-        // Laser Scan data: updated in callback
-
-
-    // protected:
-    //     // Ros related variables
-    //     ros::NodeHandle nh_;
-    //     ros::Subscriber lscan_sub;
 
 };

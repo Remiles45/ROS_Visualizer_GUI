@@ -21,24 +21,36 @@ MainWindow::MainWindow(ros::NodeHandle& nh, QWidget* parent) :
 
     setWindowTitle("Turtlebot Data Viewer");
 
+    // Start a timer for ros spin
     spinTimer = new QTimer(this);
     connect(spinTimer, &QTimer::timeout, this, &ros::spinOnce);
-    spinTimer->start(1); // add msec interval into start declaration if desired. with 0 interval it will call as soon as all events in the window systems event queue have been processed.
+    spinTimer->start(1); 
+
     createWidgets();
 }
 
 MainWindow::~MainWindow(){
+    /*
+    Description:
+        Destructor, shuts down timers
+    */
     spinTimer->stop();
 }
 
 void MainWindow::createWidgets(){
+    /*
+    Description:
+        set up main window, create sub widgets, set up layout, connect signals.
+    */
     QGridLayout *main_layout = new QGridLayout();
     QWidget *main_widget = new QWidget();
 
+    // create widget objects.
     RosTranslation *ros_translation = new RosTranslation(nh_,this);
     Viewer_W *lscan_viewer_w = new Viewer_W(this);
     AddSubscriber_W *add_sub_w = new AddSubscriber_W(this);
-    // QSpacerItem *spacer = new QSpacerItem(1,2);
+
+    // add widgets to the layout
     main_layout->addWidget(lscan_viewer_w,1,0);
     main_layout->addWidget(add_sub_w,0,0);
     main_widget->setLayout(main_layout);

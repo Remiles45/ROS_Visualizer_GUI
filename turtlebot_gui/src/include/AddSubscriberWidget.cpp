@@ -2,7 +2,11 @@
 #include <iostream>
 
 AddSubscriber_W::AddSubscriber_W (QWidget* parent) : QWidget(parent){
-
+    /*
+    Description:
+        Constructor for add subscriber widget. Will consist of a 
+        QLineEdit and submit button
+    */
     hLayout = new QHBoxLayout(this);
     hLayout->setAlignment(Qt::AlignLeft);
     setupWidget();
@@ -10,8 +14,12 @@ AddSubscriber_W::AddSubscriber_W (QWidget* parent) : QWidget(parent){
 }
 
 void AddSubscriber_W::setupWidget(){
+    /*
+    Description:
+        Set up the widget. Add sub-widgets, place in layout and connect signals
+    */
     // create widgets
-    QLabel *subscriber_name_label = new QLabel("Laser Scan Subscriber: ");
+    QLabel *subscriber_name_label = new QLabel("Laser Scan Topic: ");
     subscriber_name_entry = new QLineEdit("base_scan");
     add_subscriber_btn = new QPushButton("Subscribe");
 
@@ -23,13 +31,12 @@ void AddSubscriber_W::setupWidget(){
     // with a spacer. 
     hLayout->addStretch();
 
-
     // set up connects
     connect(add_subscriber_btn, &QPushButton::released, this, &AddSubscriber_W::handleAddSubButton);
 
 } 
 
-void AddSubscriber_W::handleAddSubButton(){
+void AddSubscriber_W::handleAddSubButton(){ 
     /*
     Description:
         Called when the subscriber button is clicked. Collects the text from the

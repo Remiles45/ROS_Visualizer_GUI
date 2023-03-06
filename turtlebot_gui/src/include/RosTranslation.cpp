@@ -5,13 +5,19 @@ RosTranslation::RosTranslation(ros::NodeHandle& nh, QWidget *parent) :
     nh_m(nh) ,
     QWidget(parent)
 {
-    // create the subscriber
-    // lscan_sub = nh_.subscribe("base_scan",3,&RosTranslation::updateScanData,this);
-    ROS_INFO("created ros translation");   
+    // setup dialog box if subscriber setup fails.
+    sub_failed_popup_m = new QMessageBox(this);
+    confirm_name_btn = sub_failed_popup_m->addButton("Confirm Topic Name",QMessageBox::YesRole); 
+    delete_sub_btn   = sub_failed_popup_m->addButton("Delete Topic",QMessageBox::DestructiveRole);
 }
 
 RosTranslation::~RosTranslation()
 {
+    /*
+    Description:
+        Destructor, shuts down timers.
+    */
+   if (subscriber_watchdog_m != nullptr){subscriber_watchdog_m->stop();}
 }
 
 void RosTranslation::updateScanData(const sensor_msgs::LaserScan& laser_scan_msg){
@@ -19,6 +25,10 @@ void RosTranslation::updateScanData(const sensor_msgs::LaserScan& laser_scan_msg
     Description:
         convert the laser scan to xyz datapoints, then emit the data as a signal.
     */
+    // confirm callback is being called for the watchdog
+    if (!first_msg_received_flag_m){subscriber_watchdog_m->setInterval(watchdog_time_interval);}
+    responding_flag_m = true;
+    first_msg_received_flag_m = true;
 
     std::vector<float> scan_data_vec = laser_scan_msg.ranges;
     float angle_inc = laser_scan_msg.angle_increment;
@@ -49,6 +59,60 @@ void RosTranslation::updateScanData(const sensor_msgs::LaserScan& laser_scan_msg
 }
 
 void RosTranslation::addSubscriber(std::string& sub){
-    lscan_sub_m = nh_m.subscribe(sub,3,&RosTranslation::updateScanData,this);
-    // subscriber_watchdog = new QTimer(this)
+    /*
+    Description: 
+        create a subscriber and set up the watchdog timer. 
+    */
+    sub_name = sub;
+    lscan_sub_m = nh_m.subscribe(sub_name,3,&RosTranslation::updateScanData,this);
+    if (subscriber_watchdog_m == nullptr){
+        // initialize watchdog if not already created
+        subscriber_watchdog_m = new QTimer(this);
+        subscriber_watchdog_m->start(new_sub_watchdog_time_interval_m);
+        connect(subscriber_watchdog_m, &QTimer::timeout, this, &RosTranslation::checkSubscribeResponding);
+    }
+    else{
+        // watchdog timeout 5 seconds after a new subscriber is added to ensure 
+        // the subscriber exists/ is the correct type and is responding.
+        subscriber_watchdog_m->setInterval(new_sub_watchdog_time_interval_m); 
+    }
+
+    first_msg_received_flag_m = false;
+    responding_flag_m = false;
+}
+
+void RosTranslation::checkSubscribeResponding(){
+    /*
+    Description:
+        Check if subscriber is sending data. 
+        If no data has ever been received, check if subscriber name
+        is correct, if not, destroy the subscriber. 
+        Handles warnings and info messages for watchdog timer timeout
+        with no received data. 
+    */
+    if (first_msg_received_flag_m){
+        if (!responding_flag_m){
+            //throw error
+            std::cout << "No New Data Received\n";
+            //TODO: make this text on the screen
+        }
+    }
+    else{
+        // throw message box error
+        QString msg = QString("Subscriber not responding\nIs '/%1' correct?").arg(QString::fromStdString(sub_name));
+        sub_failed_popup_m->setInformativeText(msg);
+        sub_failed_popup_m->exec();
+
+        if (sub_failed_popup_m->clickedButton() == confirm_name_btn){
+            first_msg_received_flag_m = true;
+        }else if (sub_failed_popup_m->clickedButton() == delete_sub_btn){
+            lscan_sub_m.shutdown();
+            subscriber_watchdog_m->stop();
+            subscriber_watchdog_m = nullptr;
+        }else{
+            std::cout << "something went wrong\n";
+            //TODO: make this throw a real error
+        }
+    }
+    responding_flag_m = false;
 }

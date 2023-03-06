@@ -29,8 +29,7 @@ class MainWindow : public QMainWindow{
         int windowHeight;
         QDesktopWidget *displayScreen;
         QMenu *fileMenu;
-        QTimer *spinTimer;
-
+        QTimer *spinTimer = nullptr;
         
     protected: 
         ros::NodeHandle nh_;
