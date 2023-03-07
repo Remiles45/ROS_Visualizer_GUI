@@ -7,8 +7,6 @@ AddSubscriber_W::AddSubscriber_W (QWidget* parent) : QWidget(parent){
         Constructor for add subscriber widget. Will consist of a 
         QLineEdit and submit button
     */
-    hLayout = new QHBoxLayout(this);
-    hLayout->setAlignment(Qt::AlignLeft);
     setupWidget();
 
 }
@@ -18,6 +16,10 @@ void AddSubscriber_W::setupWidget(){
     Description:
         Set up the widget. Add sub-widgets, place in layout and connect signals
     */
+    // create layout 
+    hLayout = new QHBoxLayout(this);
+    hLayout->setAlignment(Qt::AlignLeft);
+
     // create widgets
     QLabel *subscriber_name_label = new QLabel("Laser Scan Topic: ");
     subscriber_name_entry = new QLineEdit("base_scan");

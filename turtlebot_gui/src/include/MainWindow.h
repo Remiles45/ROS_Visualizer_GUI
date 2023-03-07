@@ -6,8 +6,8 @@
 #include "ViewerWidget.h"
 #include "AddSubscriberWidget.h"
 #include "RosTranslation.h"
+#include "TopicStatusWidget.h"
 #include <QTimer>
-#include <QSpacerItem>
 
 class MainWindow : public QMainWindow{
     Q_OBJECT //enables use of signals and slots

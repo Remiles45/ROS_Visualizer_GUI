@@ -36,6 +36,10 @@ add_executable(display_ui
     src/include/AddSubscriberWidget.cpp
     src/include/RosTranslation.h
     src/include/RosTranslation.cpp
+    src/include/TopicStatusWidget.h
+    src/include/TopicStatusWidget.cpp
+
+    src/include/StatusMsgTypes.h
     )
 target_link_libraries(display_ui 
     ${catkin_LIBRARIES}

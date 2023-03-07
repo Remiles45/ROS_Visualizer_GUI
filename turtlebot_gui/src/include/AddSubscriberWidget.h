@@ -1,9 +1,11 @@
 #pragma once
 
-// #include <QSpacerItem>
 #include <QLineEdit>
-#include "ViewerWidget.h"
+// #include "ViewerWidget.h"
 #include <QString>
+#include <QHBoxLayout>
+#include <QPushButton>
+#include <QLabel>
 
 class AddSubscriber_W : public QWidget{
     Q_OBJECT

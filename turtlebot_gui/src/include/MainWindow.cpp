@@ -27,6 +27,8 @@ MainWindow::MainWindow(ros::NodeHandle& nh, QWidget* parent) :
     spinTimer->start(1); 
 
     createWidgets();
+
+    ROS_INFO("Main Window Setup Succeeded");
 }
 
 MainWindow::~MainWindow(){
@@ -49,15 +51,18 @@ void MainWindow::createWidgets(){
     RosTranslation *ros_translation = new RosTranslation(nh_,this);
     Viewer_W *lscan_viewer_w = new Viewer_W(this);
     AddSubscriber_W *add_sub_w = new AddSubscriber_W(this);
+    TopicStatus_W *topic_status_w = new TopicStatus_W(this);
 
     // add widgets to the layout
-    main_layout->addWidget(lscan_viewer_w,1,0);
     main_layout->addWidget(add_sub_w,0,0);
+    main_layout->addWidget(topic_status_w,1,0);
+    main_layout->addWidget(lscan_viewer_w,2,0);
     main_widget->setLayout(main_layout);
     setCentralWidget(main_widget);
 
     // Connect signals and slots
     QObject::connect(ros_translation, SIGNAL(laserScanValueChanged(std::vector<std::vector<float>>&)), lscan_viewer_w, SLOT(updateData(std::vector<std::vector<float>>&)));
     QObject::connect(add_sub_w, SIGNAL(addSubSignal(std::string&)), ros_translation, SLOT(addSubscriber(std::string&)));
- 
+    QObject::connect(ros_translation, SIGNAL(subscriberStatus(msg_type&)), topic_status_w, SLOT(updateStatusMsg(msg_type&)));
+
 }
