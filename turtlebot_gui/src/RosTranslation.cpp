@@ -64,17 +64,17 @@ void RosTranslation::updateScanData(const sensor_msgs::LaserScan& laser_scan_msg
     float scan_range_min = laser_scan_msg.range_min;
     float scan_range_max = laser_scan_msg.range_max;
 
-    // create a 3xn output vector 
+    // create a 3xn output vector
     std::vector<std::vector<float>> out_scan;
-    for(int i=0; i<3; i++) {
-        std::vector<float> v; 
+    for (int i = 0; i < 3; i++) {
+        std::vector<float> v;
         out_scan.push_back(v);
         }
-    
 
     float angle = angle_min;
-    float x,y,z;
-    for(int i = 0; i < scan_data_vec.size(); i++) {
+    float x, y, z;
+
+    for (int i = 0; i < scan_data_vec.size(); i++) {
         // throw out out of range data points
         if ((scan_data_vec[i] < angle_max) & (scan_data_vec[i] > angle_min)) {
             // convert range to xy datapoint
