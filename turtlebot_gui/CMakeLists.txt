@@ -27,19 +27,20 @@ include_directories(include ${catkin_INCLUDE_DIRS})
 
 
 add_executable(display_ui 
-    src/main.cpp
+    src/include/main.h
     src/include/MainWindow.h
-    src/include/MainWindow.cpp
     src/include/ViewerWidget.h
-    src/include/ViewerWidget.cpp
     src/include/AddSubscriberWidget.h
-    src/include/AddSubscriberWidget.cpp
     src/include/RosTranslation.h
-    src/include/RosTranslation.cpp
     src/include/TopicStatusWidget.h
-    src/include/TopicStatusWidget.cpp
-
     src/include/StatusMsgTypes.h
+
+    src/main.cpp
+    src/MainWindow.cpp
+    src/ViewerWidget.cpp
+    src/AddSubscriberWidget.cpp
+    src/RosTranslation.cpp
+    src/TopicStatusWidget.cpp
     )
 target_link_libraries(display_ui 
     ${catkin_LIBRARIES}

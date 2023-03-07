@@ -1,3 +1,6 @@
+/*=========================================
+  copyright [2023] Rebecca Miles
+ ==========================================*/
 #pragma once
 /*
 Defines the types of possible statuses that the topic could have

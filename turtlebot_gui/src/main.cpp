@@ -1,9 +1,10 @@
-#include "include/MainWindow.h"
-#include <QApplication>
-#include "ros/ros.h"
+/*=========================================
+  copyright [2023] Rebecca Miles
+ ==========================================*/
 
-int main(int argc, char *argv[])
-{   
+#include "include/main.h"
+
+int main(int argc, char *argv[]) {
     // Initialize the ros node
     ros::init(argc, argv, "turtlebot_gui");
     ros::NodeHandle nh;

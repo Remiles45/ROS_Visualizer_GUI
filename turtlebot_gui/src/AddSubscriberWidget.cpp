@@ -1,22 +1,23 @@
-#include "AddSubscriberWidget.h"
-#include <iostream>
+/*=========================================
+  copyright [2023] Rebecca Miles
+ ==========================================*/
+#include "include/AddSubscriberWidget.h"
 
-AddSubscriber_W::AddSubscriber_W (QWidget* parent) : QWidget(parent){
+AddSubscriber_W::AddSubscriber_W(QWidget* parent) : QWidget(parent) {
     /*
     Description:
         Constructor for add subscriber widget. Will consist of a 
         QLineEdit and submit button
     */
     setupWidget();
-
 }
 
-void AddSubscriber_W::setupWidget(){
+void AddSubscriber_W::setupWidget() {
     /*
     Description:
         Set up the widget. Add sub-widgets, place in layout and connect signals
     */
-    // create layout 
+    // create layout
     hLayout = new QHBoxLayout(this);
     hLayout->setAlignment(Qt::AlignLeft);
 
@@ -29,16 +30,19 @@ void AddSubscriber_W::setupWidget(){
     hLayout->addWidget(subscriber_name_label);
     hLayout->addWidget(subscriber_name_entry);
     hLayout->addWidget(add_subscriber_btn);
-    // stretch will automatically fill the excess space in the layout 
-    // with a spacer. 
+    // stretch will automatically fill the excess space in the layout
+    // with a spacer.
     hLayout->addStretch();
 
     // set up connects
-    connect(add_subscriber_btn, &QPushButton::released, this, &AddSubscriber_W::handleAddSubButton);
+    connect(
+        add_subscriber_btn,
+        &QPushButton::released,
+        this,
+        &AddSubscriber_W::handleAddSubButton);
+}
 
-} 
-
-void AddSubscriber_W::handleAddSubButton(){ 
+void AddSubscriber_W::handleAddSubButton() {
     /*
     Description:
         Called when the subscriber button is clicked. Collects the text from the
