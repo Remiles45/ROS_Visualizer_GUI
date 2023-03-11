@@ -26,7 +26,7 @@ class TopicStatus_W : public QWidget {
 
     int icon_height = 15;
 
-    QPixmap connected_icon = QPixmap(":/src/images/connected_icon.png").scaledToHeight(icon_height);
-    QPixmap unresponsive_icon = QPixmap(":/src/images/unresponsive_icon.png").scaledToHeight(icon_height);
-    QPixmap disconnected_icon = QPixmap(":/src/images/disconnected_icon.png").scaledToHeight(icon_height);
+    QPixmap connected_icon = QPixmap(":/connected.png").scaledToHeight(icon_height);
+    QPixmap unresponsive_icon = QPixmap(":/unresponsive.png").scaledToHeight(icon_height);
+    QPixmap disconnected_icon = QPixmap(":/disconnected.png").scaledToHeight(icon_height);
 };

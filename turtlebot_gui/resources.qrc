@@ -1,8 +1,8 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
-    <file>src/images/connected_icon.png</file>
-    <file>src/images/disconnected_icon.png</file>
-    <file>src/images/unresponsive_icon.png</file>
-    <file>src/images/window_icon.png</file>
+    <file alias="connected.png">src/images/connected_icon.png</file>
+    <file alias="disconnected.png">src/images/disconnected_icon.png</file>
+    <file alias="unresponsive.png">src/images/unresponsive_icon.png</file>
+    <file alias="window.png">src/images/window_icon.png</file>
 </qresource>
 </RCC>
