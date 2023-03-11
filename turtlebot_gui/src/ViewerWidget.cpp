@@ -37,7 +37,7 @@ void Viewer_W::repaintScan() {
         being displayed in the GUI
     */
 
-    QList chart_series = scatter_plot_m->series();
+    auto chart_series = scatter_plot_m->series();
     if (chart_series.isEmpty()) {
         // Create a scatter series in which we will store all of the datapoints that
         // the laser scan has collected.

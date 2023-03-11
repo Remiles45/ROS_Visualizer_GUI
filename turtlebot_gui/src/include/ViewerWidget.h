@@ -4,13 +4,14 @@
 #pragma once
 
 #include <ros/ros.h>
-#include <QtWidgets>
+// #include <QtWidgets>
+#include <QList>
 #include <QtCharts>
 #include <QTimer>
-#include <QString>
-#include <cmath>
+// #include <QString>
+// #include <cmath>
 #include <vector>
-#include "sensor_msgs/LaserScan.h"
+// #include "sensor_msgs/LaserScan.h"
 
 class Viewer_W : public QWidget {
     Q_OBJECT

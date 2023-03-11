@@ -5,7 +5,7 @@ project(turtlebot_gui)
 find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs genmsg)
 
 ## Find QT packages
-find_package(Qt5 REQUIRED COMPONENTS Core Widgets Charts)
+find_package(Qt5 REQUIRED COMPONENTS Core Widgets Charts Gui)
 
 ## Enable QT
 # Make the uic, moc, and rcc Qt components be run automatically
@@ -25,6 +25,9 @@ catkin_package()
 ## Build talker and listener
 include_directories(include ${catkin_INCLUDE_DIRS})
 
+qt5_add_resources(img_resources
+    resources.qrc
+)
 
 add_executable(display_ui 
     src/include/main.h
@@ -41,11 +44,14 @@ add_executable(display_ui
     src/AddSubscriberWidget.cpp
     src/RosTranslation.cpp
     src/TopicStatusWidget.cpp
+
+    ${img_resources}
     )
 target_link_libraries(display_ui 
     ${catkin_LIBRARIES}
     Qt5::Core
     Qt5::Widgets
     Qt5::Charts
+    Qt5::Gui
     )
 add_dependencies(display_ui turtlebot_gui_generate_messages_cpp)

@@ -2,6 +2,7 @@
   copyright [2023] Rebecca Miles
  ==========================================*/
 #include "include/TopicStatusWidget.h"
+#include <iostream>
 
 TopicStatus_W::TopicStatus_W(QWidget *parent) : QWidget(parent) {
     /*
@@ -13,6 +14,10 @@ TopicStatus_W::TopicStatus_W(QWidget *parent) : QWidget(parent) {
     */
     hlayout = new QHBoxLayout(this);
     info_msg = new QLabel("");
+
+    curr_status_icon = new QLabel();
+    curr_status_icon->setPixmap(disconnected_icon);
+
     setupWidget();
 }
 
@@ -22,11 +27,7 @@ void TopicStatus_W::setupWidget() {
         sets up the widget, handles adding items to the layout and setting
         any other settings that are desired.
     */
-    hlayout->setSpacing(0);
-    hlayout->setMargin(0);
-
-    info_msg->setAlignment(Qt::AlignLeft);
-
+    hlayout->addWidget(curr_status_icon);
     hlayout->addWidget(info_msg);
     hlayout->addStretch();
 }
@@ -43,12 +44,15 @@ void TopicStatus_W::updateStatusMsg(msg_type& type) {
     switch (type) {
     case Connected:
         msg = "Topic Connected";
+        curr_status_icon->setPixmap(connected_icon);
         break;
     case Disconnected:
         msg = "No Topics Connected";
+        curr_status_icon->setPixmap(disconnected_icon);
         break;
     case Unresponsive:
         msg = "Displaying old data";
+        curr_status_icon->setPixmap(unresponsive_icon);
         break;
     case TryingToConnect:
         msg = "Connecting to topic....";
