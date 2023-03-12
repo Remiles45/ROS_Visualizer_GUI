@@ -4,5 +4,5 @@
 #pragma once
 
 #include <QApplication>
-#include "ros/ros.h"
+#include <QIcon>
 #include "MainWindow.h"

@@ -13,6 +13,8 @@ int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
     MainWindow turtle_gui(nh);
 
+    app.setWindowIcon(QIcon(":/window.png"));
+
     turtle_gui.show();
     return app.exec();
 }
