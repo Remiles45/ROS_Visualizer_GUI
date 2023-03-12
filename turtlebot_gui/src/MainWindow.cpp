@@ -76,4 +76,8 @@ void MainWindow::createWidgets() {
                 SIGNAL(subscriberStatus(msg_type&)),
                 topic_status_w,
                 SLOT(updateStatusMsg(msg_type&)));
+    QObject::connect(topic_status_w,
+                SIGNAL(unsubTrigger()),
+                ros_translation,
+                SLOT(triggerUnsubscribe()));
 }

@@ -14,6 +14,7 @@ TopicStatus_W::TopicStatus_W(QWidget *parent) : QWidget(parent) {
     */
     hlayout = new QHBoxLayout(this);
     info_msg = new QLabel("");
+    unsubscribe_btn = new QPushButton("Disconnect");
 
     curr_status_icon = new QLabel();
     curr_status_icon->setPixmap(disconnected_icon);
@@ -30,6 +31,23 @@ void TopicStatus_W::setupWidget() {
     hlayout->addWidget(curr_status_icon);
     hlayout->addWidget(info_msg);
     hlayout->addStretch();
+    hlayout->addWidget(unsubscribe_btn);
+
+    // set up connects
+    connect(
+        unsubscribe_btn,
+        &QPushButton::released,
+        this,
+        &TopicStatus_W::handleUnsubButton);
+}
+
+void TopicStatus_W::handleUnsubButton() {
+    /*
+    Description:
+        emits a signal to indicate that the user wants to unsubscribe from 
+        the current topic.
+    */
+   emit unsubTrigger();
 }
 
 void TopicStatus_W::updateStatusMsg(msg_type& type) {

@@ -91,34 +91,6 @@ void RosTranslation::updateScanData(const sensor_msgs::LaserScan& laser_scan_msg
     emit laserScanValueChanged(out_scan);
 }
 
-void RosTranslation::addSubscriber(std::string& sub) {
-    /*
-    Description:
-        create a subscriber and set up the watchdog timer.
-    Inputs:
-        std::string& sub - name of the topic to subscriber to
-    */
-    sub_name = sub;
-    lscan_sub_m = nh_m.subscribe(sub_name, 3, &RosTranslation::updateScanData, this);
-    if (subscriber_watchdog_m == nullptr) {
-        // initialize watchdog if not already created
-        subscriber_watchdog_m = new QTimer(this);
-        connect(subscriber_watchdog_m,
-                &QTimer::timeout,
-                this,
-                &RosTranslation::checkSubscribeResponding);
-        subscriber_watchdog_m->start(new_sub_watchdog_time_interval_m);
-    } else {
-        // watchdog timeout 5 seconds after a new subscriber is added to ensure
-        // the subscriber exists/ is the correct type and is responding.
-        subscriber_watchdog_m->setInterval(new_sub_watchdog_time_interval_m);
-    }
-
-    first_msg_received_flag_m = false;
-    responding_flag_m = false;
-    curr_status = TryingToConnect;
-}
-
 void RosTranslation::checkSubscribeResponding() {
     /*
     Description:
@@ -144,10 +116,7 @@ void RosTranslation::checkSubscribeResponding() {
             curr_status = Unresponsive;
         } else if (sub_failed_popup_m->clickedButton() == delete_sub_btn) {
             // shut down the subscriber and delete the timer.
-            lscan_sub_m.shutdown();
-            subscriber_watchdog_m->stop();
-            subscriber_watchdog_m = nullptr;
-            curr_status = Disconnected;
+            unsubscribe();
         } else {
             // This would be the case if the user clicked the x button without
             // confirming either disconnect or continue buttons. Assume topic is
@@ -159,10 +128,58 @@ void RosTranslation::checkSubscribeResponding() {
     responding_flag_m = false;
 }
 
+void RosTranslation::unsubscribe() {
+    /*
+    Description:
+        shuts down and deletes the subscriber,
+        shuts off the watchdog timer
+    */
+    lscan_sub_m.shutdown();
+    subscriber_watchdog_m->stop();
+    subscriber_watchdog_m = nullptr;
+    curr_status = Disconnected;
+}
+
 void RosTranslation::reportStatus() {
     /*
     Description:
         reports the status of the topic connection
     */
     emit subscriberStatus(curr_status);
+}
+
+void RosTranslation::triggerUnsubscribe() {
+    /*
+    Description:
+        SLOT, unsubscribes from the current topic.
+    */
+    unsubscribe();
+}
+
+void RosTranslation::addSubscriber(std::string& sub) {
+    /*
+    Description:
+        SLOT, create a subscriber and set up the watchdog timer.
+    Inputs:
+        std::string& sub - name of the topic to subscriber to
+    */
+    sub_name = sub;
+    lscan_sub_m = nh_m.subscribe(sub_name, 3, &RosTranslation::updateScanData, this);
+    if (subscriber_watchdog_m == nullptr) {
+        // initialize watchdog if not already created
+        subscriber_watchdog_m = new QTimer(this);
+        connect(subscriber_watchdog_m,
+                &QTimer::timeout,
+                this,
+                &RosTranslation::checkSubscribeResponding);
+        subscriber_watchdog_m->start(new_sub_watchdog_time_interval_m);
+    } else {
+        // watchdog timeout 5 seconds after a new subscriber is added to ensure
+        // the subscriber exists/ is the correct type and is responding.
+        subscriber_watchdog_m->setInterval(new_sub_watchdog_time_interval_m);
+    }
+
+    first_msg_received_flag_m = false;
+    responding_flag_m = false;
+    curr_status = TryingToConnect;
 }

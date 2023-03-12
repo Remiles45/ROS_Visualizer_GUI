@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <QHBoxLayout>
 #include <QPixmap>
+#include <QPushButton>
 #include "StatusMsgTypes.h"
 
 
@@ -17,12 +18,17 @@ class TopicStatus_W : public QWidget {
 
  public slots:
     void updateStatusMsg(msg_type&);
+ 
+ signals:
+    void unsubTrigger();
 
  private:
     void setupWidget(void);
+    void handleUnsubButton(void);
     QLabel *info_msg;
     QHBoxLayout *hlayout;
     QLabel *curr_status_icon;
+    QPushButton *unsubscribe_btn;
 
     int icon_height = 15;
 

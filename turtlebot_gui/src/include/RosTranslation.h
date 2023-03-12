@@ -24,6 +24,7 @@ class RosTranslation : public QWidget {
     void checkSubscribeFirstResponse(void);
     void checkSubscribeResponding(void);
     void reportStatus(void);
+    void unsubscribe(void);
 
     // Subscriber Timed Out
     QMessageBox *sub_failed_popup_m;
@@ -53,6 +54,7 @@ class RosTranslation : public QWidget {
 
  public slots:
     void addSubscriber(std::string&);
+    void triggerUnsubscribe();
 
  protected:
     // Ros related variables
