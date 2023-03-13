@@ -3,17 +3,12 @@
  ==========================================*/
 #pragma once
 
-#include <ros/ros.h>
-// #include <QtWidgets>
 #include <QList>
 #include <QtCharts>
 #include <QTimer>
 #include <QGridLayout>
 #include <QPushButton>
-// #include <QString>
-// #include <cmath>
 #include <vector>
-// #include "sensor_msgs/LaserScan.h"
 
 class Viewer_W : public QWidget {
     Q_OBJECT
