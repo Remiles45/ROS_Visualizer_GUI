@@ -4,5 +4,8 @@
     <file alias="disconnected.png">src/images/disconnected_icon.png</file>
     <file alias="unresponsive.png">src/images/unresponsive_icon.png</file>
     <file alias="window.png">src/images/window_icon.png</file>
+    <file alias="zoomIn.png">src/images/zoomIn.png</file>
+    <file alias="zoomOut.png">src/images/zoomOut.png</file>
+    <file alias="zoomHome.png">src/images/zoomHome.png</file>
 </qresource>
 </RCC>

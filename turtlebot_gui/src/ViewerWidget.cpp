@@ -10,16 +10,38 @@ Viewer_W::Viewer_W(QWidget* parent) :
         Constructor, sets up a subscriber to the turtlebot laserscan,
         creates a plot in the GUI which will display the collected laserscan, updating periodically.
     */
-    // create a plot and add it to the widget
+    // create widget objects
+    // buttons
+    zoom_in_btn_m = new QPushButton(QIcon(zoom_in_pix_m), "", this);
+    zoom_out_btn_m = new QPushButton(QIcon(zoom_out_pix_m), "", this);
+    zoom_home_btn_m = new QPushButton(QIcon(zoom_home_pix_m), "", this);
+    //plot
     scatter_plot_m = new QChart();
-    viewer = new QChartView(scatter_plot_m);
-    QHBoxLayout *hLayout = new QHBoxLayout(this);
-    hLayout->addWidget(viewer, 4);
+    viewer_m = new QChartView(scatter_plot_m);
+
+    // initialize settings
+    viewer_m->setRubberBand(QChartView::RectangleRubberBand);
+    scatter_plot_m->legend()->setVisible(false);
+
+    // create layout
+    layout_m = new QGridLayout(this);
+
+    // add viewer to layout
+    layout_m->addWidget(viewer_m, 0, 0, 15, 1);
+    layout_m->addWidget(zoom_in_btn_m, 1, 2, Qt::AlignTop);
+    layout_m->addWidget(zoom_out_btn_m, 2, 2, Qt::AlignTop);
+    layout_m->addWidget(zoom_home_btn_m, 3, 2, Qt::AlignTop);
+    layout_m->columnStretch(1);
+
+    // connect buttons
+    connect(zoom_in_btn_m, &QPushButton::released, this, &Viewer_W::zoomIn);
+    connect(zoom_out_btn_m, &QPushButton::released, this, &Viewer_W::zoomOut);
+    connect(zoom_home_btn_m, &QPushButton::released, this, &Viewer_W::zoomHome);
 
     // start a timer to repaint the plot every 250 mS
-    repaintTimer = new QTimer(this);
-    connect(repaintTimer, &QTimer::timeout, this, &Viewer_W::repaintScan);
-    repaintTimer->start(250);
+    repaint_timer_m = new QTimer(this);
+    connect(repaint_timer_m, &QTimer::timeout, this, &Viewer_W::repaintScan);
+    repaint_timer_m->start(250);
 }
 
 Viewer_W::~Viewer_W() {
@@ -27,7 +49,7 @@ Viewer_W::~Viewer_W() {
     Description:
         Destructor, shuts down timers.
     */
-    repaintTimer->stop();
+    repaint_timer_m->stop();
 }
 
 void Viewer_W::repaintScan() {
@@ -55,7 +77,7 @@ void Viewer_W::repaintScan() {
     }
 
     // update plot with new data
-    viewer->update();
+    viewer_m->update();
 }
 
 void Viewer_W::addDataToSeries() {
@@ -85,4 +107,28 @@ void Viewer_W::setMarkerSize(float size) {
     */
     marker_size_m = size;
     scan_data_m->setMarkerSize(marker_size_m);
+}
+
+void Viewer_W::zoomIn(){
+    /*
+    Description:
+        Triggered by button, zooms in 
+    */
+    scatter_plot_m->zoomIn();
+}
+
+void Viewer_W::zoomOut(){
+    /*
+    Description:
+        Triggered by button, zooms in 
+    */
+    scatter_plot_m->zoomOut();
+}
+
+void Viewer_W::zoomHome(){
+    /*
+    Description:
+        Triggered by button, zooms in 
+    */
+    scatter_plot_m->createDefaultAxes();
 }

@@ -2,7 +2,6 @@
   copyright [2023] Rebecca Miles
  ==========================================*/
 #include "include/TopicStatusWidget.h"
-#include <iostream>
 
 TopicStatus_W::TopicStatus_W(QWidget *parent) : QWidget(parent) {
     /*

@@ -19,8 +19,8 @@ MainWindow::MainWindow(ros::NodeHandle& nh, QWidget* parent) :
     // set the default size of the window to 50% of the available screen width
     // and 75% of the available screen height
     QRect screenSize = displayScreen->availableGeometry(this);
-    this->setFixedSize(QSize(screenSize.width()*0.5f,
-                             screenSize.height()*0.75f));
+    this->setFixedSize(QSize(screenSize.width()*0.4f,
+                             screenSize.height()*0.6f));
 
     setWindowTitle("Turtlebot Data Viewer");
 
@@ -56,10 +56,11 @@ void MainWindow::createWidgets() {
     AddSubscriber_W *add_sub_w = new AddSubscriber_W(this);
     TopicStatus_W *topic_status_w = new TopicStatus_W(this);
 
+    main_layout->setVerticalSpacing(0);
     // add widgets to the layout
-    main_layout->addWidget(add_sub_w, 0, 0);
-    main_layout->addWidget(topic_status_w, 1, 0);
-    main_layout->addWidget(lscan_viewer_w, 2, 0);
+    main_layout->addWidget(add_sub_w, 0, 0, 1, 1);
+    main_layout->addWidget(topic_status_w, 1, 0, 1, 2, Qt::AlignBottom);
+    main_layout->addWidget(lscan_viewer_w, 2, 0, 15, 3);
     main_widget->setLayout(main_layout);
     setCentralWidget(main_widget);
 
