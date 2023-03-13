@@ -56,5 +56,4 @@ class Viewer_W : public QWidget {
     QPixmap zoom_in_pix_m = QPixmap(":/zoomIn.png").scaledToHeight(button_height);
     QPixmap zoom_out_pix_m = QPixmap(":/zoomOut.png").scaledToHeight(button_height);
     QPixmap zoom_home_pix_m = QPixmap(":/zoomHome.png").scaledToHeight(button_height);
-
 };

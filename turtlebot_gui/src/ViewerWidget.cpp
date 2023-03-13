@@ -15,7 +15,7 @@ Viewer_W::Viewer_W(QWidget* parent) :
     zoom_in_btn_m = new QPushButton(QIcon(zoom_in_pix_m), "", this);
     zoom_out_btn_m = new QPushButton(QIcon(zoom_out_pix_m), "", this);
     zoom_home_btn_m = new QPushButton(QIcon(zoom_home_pix_m), "", this);
-    //plot
+    // plot
     scatter_plot_m = new QChart();
     viewer_m = new QChartView(scatter_plot_m);
 
@@ -109,7 +109,7 @@ void Viewer_W::setMarkerSize(float size) {
     scan_data_m->setMarkerSize(marker_size_m);
 }
 
-void Viewer_W::zoomIn(){
+void Viewer_W::zoomIn() {
     /*
     Description:
         Triggered by button, zooms in 
@@ -117,7 +117,7 @@ void Viewer_W::zoomIn(){
     scatter_plot_m->zoomIn();
 }
 
-void Viewer_W::zoomOut(){
+void Viewer_W::zoomOut() {
     /*
     Description:
         Triggered by button, zooms in 
@@ -125,10 +125,10 @@ void Viewer_W::zoomOut(){
     scatter_plot_m->zoomOut();
 }
 
-void Viewer_W::zoomHome(){
+void Viewer_W::zoomHome() {
     /*
     Description:
         Triggered by button, zooms in 
     */
-    scatter_plot_m->createDefaultAxes();
+    scatter_plot_m->zoomReset();
 }

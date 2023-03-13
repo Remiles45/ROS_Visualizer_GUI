@@ -18,7 +18,7 @@ class TopicStatus_W : public QWidget {
 
  public slots:
     void updateStatusMsg(msg_type&);
- 
+
  signals:
     void unsubTrigger();
 

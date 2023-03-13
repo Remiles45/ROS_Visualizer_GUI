@@ -46,7 +46,7 @@ void TopicStatus_W::handleUnsubButton() {
         emits a signal to indicate that the user wants to unsubscribe from 
         the current topic.
     */
-   emit unsubTrigger();
+    emit unsubTrigger();
 }
 
 void TopicStatus_W::updateStatusMsg(msg_type& type) {
