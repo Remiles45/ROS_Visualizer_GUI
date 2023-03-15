@@ -6,4 +6,4 @@ run using:
 
 ```rosrun turtlebot_gui display_ui```
 
-![image](https://user-images.githubusercontent.com/23528591/225129606-f7677cdf-4651-43e3-ab35-86db80ae71a6.png)
+![image](https://user-images.githubusercontent.com/23528591/225470397-108e4f26-4926-4f5e-a7f5-aebbd4086042.png)
