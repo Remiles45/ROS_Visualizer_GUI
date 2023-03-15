@@ -45,9 +45,9 @@ Viewer_W::Viewer_W(QWidget* parent) :
 }
 
 Viewer_W::~Viewer_W() {
-    /*
-    Description:
-        Destructor, shuts down timers.
+    /**
+     * Description:
+     *   Destructor, shuts down timers. 
     */
     repaint_timer_m->stop();
 }

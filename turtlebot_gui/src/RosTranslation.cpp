@@ -6,15 +6,15 @@
 RosTranslation::RosTranslation(ros::NodeHandle& nh, QWidget *parent) :
     nh_m(nh),
     QWidget(parent) {
-    /*
-    Description:
-        Constructor, creates basic widget elements that will be used.
-        In this case that is a MessageBox which will inform the user
-        if connecting to the chosen topic appears to have failed and
-        a timer to continually report the status of the topic connection.
-    Inputs:
-        ros::NodeHandle& nh - the ros node
-        QWidget *parent - the parent widget (main window)
+    /**
+     * DESCRIPTION:
+     *   Constructor, creates basic widget elements that will be used.
+     *   In this case that is a MessageBox which will inform the user
+     *   if connecting to the chosen topic appears to have failed and
+     *   a timer to continually report the status of the topic connection.
+     * INPUTS:
+     *   ros::NodeHandle& nh - the ros node
+     *   QWidget *parent - the parent widget (main window)
     */
     // setup dialog box if subscriber setup fails.
     sub_failed_popup_m = new QMessageBox(this);
@@ -33,20 +33,20 @@ RosTranslation::RosTranslation(ros::NodeHandle& nh, QWidget *parent) :
 }
 
 RosTranslation::~RosTranslation() {
-    /*
-    Description:
-        Destructor, shuts down timers.
+    /**
+     * DESCRIPTION:
+     *   Destructor, shuts down timers.
     */
     if (subscriber_watchdog_m != nullptr) {subscriber_watchdog_m->stop();}
     if (status_update_timer_m != nullptr) {status_update_timer_m->stop();}
 }
 
 void RosTranslation::updateScanData(const sensor_msgs::LaserScan& laser_scan_msg) {
-    /*
-    Description:
-        convert the laser scan to xyz datapoints, then emit the data as a signal.
-    Inputs:
-        sensor_msgs::LaserScan& - incoming laser scan ros message
+    /**
+     * DESCRIPTION:
+     *   convert the laser scan to xyz datapoints, then emit the data as a signal.
+     * INPUTS:
+     *   sensor_msgs::LaserScan& - incoming laser scan ros message
     */
     // confirm callback is being called for the watchdog / status reporter
     if (!first_msg_received_flag_m) {
@@ -57,12 +57,12 @@ void RosTranslation::updateScanData(const sensor_msgs::LaserScan& laser_scan_msg
     curr_status = Connected;
 
     // collect incoming data
-    std::vector<float> scan_data_vec = laser_scan_msg.ranges;
-    float angle_inc = laser_scan_msg.angle_increment;
-    float angle_min = laser_scan_msg.angle_min;
-    float angle_max = laser_scan_msg.angle_max;
-    float scan_range_min = laser_scan_msg.range_min;
-    float scan_range_max = laser_scan_msg.range_max;
+    std::vector<float> scan_data_vec = laser_scan_msg.ranges; // m
+    angle_inc_m = laser_scan_msg.angle_increment;
+    angle_min_m = laser_scan_msg.angle_min;
+    angle_max_m = laser_scan_msg.angle_max;
+    scan_range_min_m = laser_scan_msg.range_min; // m
+    scan_range_max_m = laser_scan_msg.range_max; // m
 
     // create a 3xn output vector
     std::vector<std::vector<float>> out_scan;
@@ -70,13 +70,12 @@ void RosTranslation::updateScanData(const sensor_msgs::LaserScan& laser_scan_msg
         std::vector<float> v;
         out_scan.push_back(v);
         }
-
-    float angle = angle_min;
+    
+    float angle = angle_min_m;
     float x, y, z;
 
     for (int i = 0; i < scan_data_vec.size(); i++) {
-        // throw out out of range data points
-        if ((scan_data_vec[i] < angle_max) & (scan_data_vec[i] > angle_min)) {
+        if (checkValidPt(scan_data_vec[i], angle)) {
             // convert range to xy datapoint
             x = scan_data_vec[i] * std::cos(angle);
             y = scan_data_vec[i] * std::sin(angle);
@@ -86,19 +85,35 @@ void RosTranslation::updateScanData(const sensor_msgs::LaserScan& laser_scan_msg
             out_scan[1].push_back(y);
             out_scan[2].push_back(z);
         }
-        angle += angle_inc;
+        angle += angle_inc_m;
     }
     emit laserScanValueChanged(out_scan);
 }
 
+bool RosTranslation::checkValidPt(float pt, float angle) {
+    /**
+     * DESCRIPTION:
+     *  checks if a datapoint is valid
+     * INPUTS:
+     *  float pt - range value to check
+     *  float angle - angle value to check 
+     * OUTPUTS:
+     *  bool - if the given datapoint satisfies all validity conditions
+    */
+    bool valid_float = !isnan(pt) & !isinf(pt);
+    bool valid_range = (pt < scan_range_max_m) & (pt > scan_range_min_m);
+    bool valid_angle = (angle < angle_max_m) & (angle > angle_min_m);
+    return valid_float & valid_range & valid_angle;
+}
+
 void RosTranslation::checkSubscribeResponding() {
-    /*
-    Description:
-        Check if subscriber is sending data.
-        If no data has ever been received, check if subscriber name
-        is correct, if not, destroy the subscriber.
-        Handles warnings and info messages for watchdog timer timeout
-        with no received data.
+    /**
+     * DESCRIPTION:
+     *   Check if subscriber is sending data.
+     *   If no data has ever been received, check if subscriber name
+     *   is correct, if not, destroy the subscriber.
+     *   Handles warnings and info messages for watchdog timer timeout
+     *   with no received data.
     */
 
     if (first_msg_received_flag_m) {
@@ -129,10 +144,10 @@ void RosTranslation::checkSubscribeResponding() {
 }
 
 void RosTranslation::unsubscribe() {
-    /*
-    Description:
-        shuts down and deletes the subscriber,
-        shuts off the watchdog timer
+    /**
+     * DESCRIPTION:
+     *   shuts down and deletes the subscriber,
+     *   shuts off the watchdog timer
     */
     lscan_sub_m.shutdown();
     subscriber_watchdog_m->stop();
@@ -141,27 +156,27 @@ void RosTranslation::unsubscribe() {
 }
 
 void RosTranslation::reportStatus() {
-    /*
-    Description:
-        reports the status of the topic connection
+    /**
+     * DESCRIPTION:
+     *   reports the status of the topic connection
     */
     emit subscriberStatus(curr_status);
 }
 
 void RosTranslation::triggerUnsubscribe() {
-    /*
-    Description:
-        SLOT, unsubscribes from the current topic.
+    /**
+     * DESCRIPTION:
+     *   SLOT, unsubscribes from the current topic.
     */
     unsubscribe();
 }
 
 void RosTranslation::addSubscriber(std::string& sub) {
-    /*
-    Description:
-        SLOT, create a subscriber and set up the watchdog timer.
-    Inputs:
-        std::string& sub - name of the topic to subscriber to
+    /**
+     * DESCRIPTION:
+     *   SLOT, create a subscriber and set up the watchdog timer.
+     * INPUTS:
+     *   std::string& sub - name of the topic to subscriber to
     */
     sub_name = sub;
     lscan_sub_m = nh_m.subscribe(sub_name, 3, &RosTranslation::updateScanData, this);
