@@ -20,21 +20,19 @@ class RosTranslation : public QWidget {
     ~RosTranslation();
 
  private:
-   //  struct dataPt;
-
     void updateScanData(const sensor_msgs::LaserScan&);
     void checkSubscribeFirstResponse(void);
     void checkSubscribeResponding(void);
     void reportStatus(void);
     void unsubscribe(void);
     bool checkValidPt(float pt, float angle);
-    
+
     // laserscan data variables
     float angle_inc_m;
     float angle_min_m;
     float angle_max_m;
-    float scan_range_min_m; // m
-    float scan_range_max_m; // m
+    float scan_range_min_m;  // m
+    float scan_range_max_m;  // m
 
     // Subscriber Timed Out
     QMessageBox *sub_failed_popup_m;

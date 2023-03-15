@@ -57,12 +57,12 @@ void RosTranslation::updateScanData(const sensor_msgs::LaserScan& laser_scan_msg
     curr_status = Connected;
 
     // collect incoming data
-    std::vector<float> scan_data_vec = laser_scan_msg.ranges; // m
+    std::vector<float> scan_data_vec = laser_scan_msg.ranges;  // m
     angle_inc_m = laser_scan_msg.angle_increment;
     angle_min_m = laser_scan_msg.angle_min;
     angle_max_m = laser_scan_msg.angle_max;
-    scan_range_min_m = laser_scan_msg.range_min; // m
-    scan_range_max_m = laser_scan_msg.range_max; // m
+    scan_range_min_m = laser_scan_msg.range_min;  // m
+    scan_range_max_m = laser_scan_msg.range_max;  // m
 
     // create a 3xn output vector
     std::vector<std::vector<float>> out_scan;
@@ -70,7 +70,7 @@ void RosTranslation::updateScanData(const sensor_msgs::LaserScan& laser_scan_msg
         std::vector<float> v;
         out_scan.push_back(v);
         }
-    
+
     float angle = angle_min_m;
     float x, y, z;
 
