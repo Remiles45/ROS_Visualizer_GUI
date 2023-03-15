@@ -9,6 +9,7 @@
 #include <QGridLayout>
 #include <QPushButton>
 #include <vector>
+#include <ros/ros.h>
 
 class Viewer_W : public QWidget {
     Q_OBJECT

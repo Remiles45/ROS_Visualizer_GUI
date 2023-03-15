@@ -47,6 +47,7 @@ add_executable(display_ui
 
     ${img_resources}
     )
+
 target_link_libraries(display_ui 
     ${catkin_LIBRARIES}
     Qt5::Core
@@ -54,4 +55,5 @@ target_link_libraries(display_ui
     Qt5::Charts
     Qt5::Gui
     )
+
 add_dependencies(display_ui turtlebot_gui_generate_messages_cpp)
