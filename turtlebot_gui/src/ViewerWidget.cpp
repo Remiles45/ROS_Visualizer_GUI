@@ -45,9 +45,9 @@ Viewer_W::Viewer_W(QWidget* parent) :
 }
 
 Viewer_W::~Viewer_W() {
-    /*
-    Description:
-        Destructor, shuts down timers.
+    /**
+     * Description:
+     *   Destructor, shuts down timers. 
     */
     repaint_timer_m->stop();
 }
@@ -85,6 +85,7 @@ void Viewer_W::addDataToSeries() {
     Description:
         Convert data vector into x and y points to plot
     */
+    // check if the raw data vector has data (relevant for before any data has been received)
     if (!raw_data_m.empty()) {
         for (int j=0; j < raw_data_m[0].size(); j++) {
             scan_data_m->append(raw_data_m[0][j], raw_data_m[1][j]);
@@ -95,9 +96,17 @@ void Viewer_W::addDataToSeries() {
 void Viewer_W::updateData(std::vector<std::vector<float>> &in_data) {
     /*
     Description:
+        SLOT,
+        if this function is triggered but the in_data is empty, 
+        either an empty range vector was received or all datapoints were
+        invalid. In which case, throw a warning to alert the user of possible problem.
         Store incoming data into member variable.
     */
-    raw_data_m = in_data;
+    if (in_data.empty()) {
+        ROS_WARN("Received Empty or Invalid Scan");
+    } else {
+        raw_data_m = in_data;
+    }
 }
 
 void Viewer_W::setMarkerSize(float size) {

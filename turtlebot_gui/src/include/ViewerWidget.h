@@ -3,6 +3,7 @@
  ==========================================*/
 #pragma once
 
+#include <ros/ros.h>
 #include <QList>
 #include <QtCharts>
 #include <QTimer>
