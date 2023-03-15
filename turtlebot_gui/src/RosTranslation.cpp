@@ -87,6 +87,7 @@ void RosTranslation::updateScanData(const sensor_msgs::LaserScan& laser_scan_msg
         }
         angle += angle_inc_m;
     }
+
     emit laserScanValueChanged(out_scan);
 }
 

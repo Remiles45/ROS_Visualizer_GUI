@@ -101,8 +101,10 @@ void Viewer_W::updateData(std::vector<std::vector<float>> &in_data) {
         either an empty range vector was received or all datapoints were
         invalid. In which case, throw a warning to alert the user of possible problem.
         Store incoming data into member variable.
+        
+        Additionally, a minimum of 3 datapoints are required to display the scatterplot.
     */
-    if (in_data.empty()) {
+    if (in_data.size() < 3) {
         ROS_WARN("Received Empty or Invalid Scan");
     } else {
         raw_data_m = in_data;
