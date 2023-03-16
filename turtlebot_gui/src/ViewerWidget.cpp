@@ -22,6 +22,20 @@ Viewer_W::Viewer_W(QWidget* parent) :
     // initialize settings
     viewer_m->setRubberBand(QChartView::RectangleRubberBand);
     scatter_plot_m->legend()->setVisible(false);
+    haxis = new QValueAxis(this);
+    vaxis = new QValueAxis(this);
+
+    scatter_plot_m->addAxis(haxis, Qt::AlignBottom);
+    scatter_plot_m->addAxis(vaxis, Qt::AlignLeft);
+
+    haxis->setTitleText("X (m)");
+    vaxis->setTitleText("Y (m)");
+
+    haxis->setRange(-2.5, 2.5);
+    vaxis->setRange(-2.5, 2.5);
+
+    haxis->setTickAnchor(0);
+    vaxis->setTickAnchor(0);
 
     // create layout
     layout_m = new QGridLayout(this);
@@ -69,7 +83,10 @@ void Viewer_W::repaintScan() {
         addDataToSeries();
         // add the data to the plot
         scatter_plot_m->addSeries(scan_data_m);
-        scatter_plot_m->createDefaultAxes();
+        ROS_INFO("created series");
+        scan_data_m->attachAxis(haxis);
+        scan_data_m->attachAxis(vaxis);
+        ROS_INFO("attached axes");
     } else {
         // update data in the plot
         scan_data_m->clear();
