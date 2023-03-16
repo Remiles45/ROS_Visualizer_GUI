@@ -25,14 +25,14 @@ Viewer_W::Viewer_W(QWidget* parent) :
     haxis = new QValueAxis(this);
     vaxis = new QValueAxis(this);
 
-    scatter_plot_m->addAxis(haxis,Qt::AlignBottom);
-    scatter_plot_m->addAxis(vaxis,Qt::AlignLeft);
+    scatter_plot_m->addAxis(haxis, Qt::AlignBottom);
+    scatter_plot_m->addAxis(vaxis, Qt::AlignLeft);
 
     haxis->setTitleText("X (m)");
     vaxis->setTitleText("Y (m)");
 
-    haxis->setRange(-2.5,2.5);
-    vaxis->setRange(-2.5,2.5);
+    haxis->setRange(-2.5, 2.5);
+    vaxis->setRange(-2.5, 2.5);
 
     haxis->setTickAnchor(0);
     vaxis->setTickAnchor(0);
