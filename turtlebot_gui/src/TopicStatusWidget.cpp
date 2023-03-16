@@ -4,12 +4,12 @@
 #include "include/TopicStatusWidget.h"
 
 TopicStatus_W::TopicStatus_W(QWidget *parent) : QWidget(parent) {
-    /*
-    Description:
-        Constructor, sets up layout and adds a place for status message
-        to be shown
-    Inputs: 
-        QWidget *parent - parent widget (Main window)
+    /**
+     * DESCRIPTION:
+     *   Constructor, sets up layout and adds a place for status message
+     *   to be shown
+     * INPUTS: 
+     *   QWidget *parent - parent widget (Main window)
     */
     hlayout = new QHBoxLayout(this);
     info_msg = new QLabel("");
@@ -22,10 +22,10 @@ TopicStatus_W::TopicStatus_W(QWidget *parent) : QWidget(parent) {
 }
 
 void TopicStatus_W::setupWidget() {
-    /*
-    Description:
-        sets up the widget, handles adding items to the layout and setting
-        any other settings that are desired.
+    /**
+     * DESCRIPTION:
+     *   sets up the widget, handles adding items to the layout and setting
+     *   any other settings that are desired.
     */
     hlayout->addWidget(curr_status_icon);
     hlayout->addWidget(info_msg);
@@ -41,21 +41,21 @@ void TopicStatus_W::setupWidget() {
 }
 
 void TopicStatus_W::handleUnsubButton() {
-    /*
-    Description:
-        emits a signal to indicate that the user wants to unsubscribe from 
-        the current topic.
+    /**
+     * DESCRIPTION:
+     *   emits a signal to indicate that the user wants to unsubscribe from 
+     *   the current topic.
     */
     emit unsubTrigger();
 }
 
 void TopicStatus_W::updateStatusMsg(msg_type& type) {
-    /*
-    Description:
-        SLOT, sets the message to be displayed according to the message type
-        (enum) that is indicated by the signal.
-    Inputs: 
-        msg_type& type - enum defined in StatusMsgTypes.h 
+    /**
+     * DESCRIPTION:
+     *   SLOT, sets the message to be displayed according to the message type
+     *   (enum) that is indicated by the signal.
+     * INPUTS: 
+     *   msg_type& type - enum defined in StatusMsgTypes.h 
     */
     QString msg;
     switch (type) {

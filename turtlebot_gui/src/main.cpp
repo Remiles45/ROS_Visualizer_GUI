@@ -5,6 +5,10 @@
 #include "include/main.h"
 
 int main(int argc, char *argv[]) {
+/**
+ * DESCRIPTION: 
+ *  sets up the application and displays the GUI window
+*/
     // Initialize the ros node
     ros::init(argc, argv, "turtlebot_gui");
     ros::NodeHandle nh;
