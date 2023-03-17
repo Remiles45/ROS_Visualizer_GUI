@@ -9,7 +9,6 @@
 #include <QTimer>
 #include <QGridLayout>
 #include <QPushButton>
-// #include <QAbstractAxis>
 #include <vector>
 
 class Viewer_W : public QWidget {

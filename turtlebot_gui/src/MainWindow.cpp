@@ -6,15 +6,13 @@
 MainWindow::MainWindow(ros::NodeHandle& nh, QWidget* parent) :
     QMainWindow(parent),
     nh_(nh) {
-    /*
-    ===========================================================
-    Description:
-        Main window constructor. the : textEdit(new QTextEdit)
-        passes ownership of the text edit to the main window
-
-        This constructor sets up the entire window and places
-        in all of the corresponding widgets.
-    ===========================================================
+    /**
+     * DESCRIPTION:
+     *   Main window constructor. the : textEdit(new QTextEdit)
+     *   passes ownership of the text edit to the main window
+     * 
+     *   This constructor sets up the entire window and places
+     *   in all of the corresponding widgets.
     */
     // set the default size of the window to 50% of the available screen width
     // and 75% of the available screen height
@@ -35,17 +33,17 @@ MainWindow::MainWindow(ros::NodeHandle& nh, QWidget* parent) :
 }
 
 MainWindow::~MainWindow() {
-    /*
-    Description:
-        Destructor, shuts down timers
+    /**
+     * DESCRIPTION:
+     *   Destructor, shuts down timers
     */
     spinTimer->stop();
 }
 
 void MainWindow::createWidgets() {
-    /*
-    Description:
-        set up main window, create sub widgets, set up layout, connect signals.
+    /**
+     * DESCRIPTION:
+     *   set up main window, create sub widgets, set up layout, connect signals.
     */
     QGridLayout *main_layout = new QGridLayout();
     QWidget *main_widget = new QWidget();

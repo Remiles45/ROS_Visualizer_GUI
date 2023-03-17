@@ -1,0 +1,6 @@
+{
+    "python.autoComplete.extraPaths": [
+        "C:/Users/Becca/Documents/catkin_ws/devel\\lib/site-packages",
+        "C:/Users/Becca/anaconda3/envs/ros_env/Library\\lib/site-packages"
+    ]
+}

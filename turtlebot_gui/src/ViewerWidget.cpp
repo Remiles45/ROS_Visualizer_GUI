@@ -5,10 +5,10 @@
 
 Viewer_W::Viewer_W(QWidget* parent) :
     QWidget(parent) {
-    /*
-    Description:
-        Constructor, sets up a subscriber to the turtlebot laserscan,
-        creates a plot in the GUI which will display the collected laserscan, updating periodically.
+    /**
+     * DESCRIPTION:
+     *   Constructor, sets up a subscriber to the turtlebot laserscan,
+     *   creates a plot in the GUI which will display the collected laserscan, updating periodically.
     */
     // create widget objects
     // buttons
@@ -19,9 +19,10 @@ Viewer_W::Viewer_W(QWidget* parent) :
     scatter_plot_m = new QChart();
     viewer_m = new QChartView(scatter_plot_m);
 
-    // initialize settings
+    // initialize plot settings
     viewer_m->setRubberBand(QChartView::RectangleRubberBand);
     scatter_plot_m->legend()->setVisible(false);
+    // create the x and y axis
     haxis = new QValueAxis(this);
     vaxis = new QValueAxis(this);
 
@@ -60,17 +61,17 @@ Viewer_W::Viewer_W(QWidget* parent) :
 
 Viewer_W::~Viewer_W() {
     /**
-     * Description:
+     * DESCRIPTION:
      *   Destructor, shuts down timers. 
     */
     repaint_timer_m->stop();
 }
 
 void Viewer_W::repaintScan() {
-    /*
-    Description:
-        takes the most recent laser scan and updates the plot
-        being displayed in the GUI
+    /**
+     * DESCRIPTION: 
+     *    takes the most recent laser scan and updates the plot
+     *   being displayed in the GUI
     */
 
     auto chart_series = scatter_plot_m->series();
@@ -98,9 +99,9 @@ void Viewer_W::repaintScan() {
 }
 
 void Viewer_W::addDataToSeries() {
-    /*
-    Description:
-        Convert data vector into x and y points to plot
+    /**
+     * DESCRIPTION:
+     *   Convert data vector into x and y points to plot
     */
     // check if the raw data vector has data (relevant for before any data has been received)
     if (!raw_data_m.empty()) {
@@ -111,15 +112,15 @@ void Viewer_W::addDataToSeries() {
 }
 
 void Viewer_W::updateData(std::vector<std::vector<float>> &in_data) {
-    /*
-    Description:
-        SLOT,
-        if this function is triggered but the in_data is empty, 
-        either an empty range vector was received or all datapoints were
-        invalid. In which case, throw a warning to alert the user of possible problem.
-        Store incoming data into member variable.
-        
-        Additionally, a minimum of 3 datapoints are required to display the scatterplot.
+    /**
+     * DESCRIPTION:
+     *   SLOT,
+     *   if this function is triggered but the in_data is empty, 
+     *   either an empty range vector was received or all datapoints were
+     *   invalid. In which case, throw a warning to alert the user of possible problem.
+     *   Store incoming data into member variable.
+     *   
+     *   Additionally, a minimum of 3 datapoints are required to display the scatterplot.
     */
     if (in_data.size() < 3) {
         ROS_WARN("Received Empty or Invalid Scan");
@@ -129,34 +130,34 @@ void Viewer_W::updateData(std::vector<std::vector<float>> &in_data) {
 }
 
 void Viewer_W::setMarkerSize(float size) {
-    /*
-    Description:
-        set the size of the markers displaying datapoints
+    /**
+     * DESCRIPTION:
+     *   set the size of the markers displaying datapoints
     */
     marker_size_m = size;
     scan_data_m->setMarkerSize(marker_size_m);
 }
 
 void Viewer_W::zoomIn() {
-    /*
-    Description:
-        Triggered by button, zooms in 
+    /**
+     * DESCRIPTION:
+     *   Triggered by button, zooms in 
     */
     scatter_plot_m->zoomIn();
 }
 
 void Viewer_W::zoomOut() {
-    /*
-    Description:
-        Triggered by button, zooms in 
+    /**
+     * DESCRIPTION:
+     *   Triggered by button, zooms in 
     */
     scatter_plot_m->zoomOut();
 }
 
 void Viewer_W::zoomHome() {
-    /*
-    Description:
-        Triggered by button, zooms in 
+    /**
+     * DESCRIPTION:
+     *   Triggered by button, zooms in 
     */
     scatter_plot_m->zoomReset();
 }

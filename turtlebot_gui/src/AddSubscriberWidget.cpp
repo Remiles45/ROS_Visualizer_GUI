@@ -4,18 +4,18 @@
 #include "include/AddSubscriberWidget.h"
 
 AddSubscriber_W::AddSubscriber_W(QWidget* parent) : QWidget(parent) {
-    /*
-    Description:
-        Constructor for add subscriber widget. Will consist of a 
-        QLineEdit and submit button
+    /**
+     * DESCRIPTION:
+     *   Constructor for add subscriber widget. Will consist of a 
+     *   QLineEdit and submit button
     */
     setupWidget();
 }
 
 void AddSubscriber_W::setupWidget() {
-    /*
-    Description:
-        Set up the widget. Add sub-widgets, place in layout and connect signals
+    /**
+     * DESCRIPTION:
+     *   Set up the widget. Add sub-widgets, place in layout and connect signals
     */
     // create layout
     hLayout = new QHBoxLayout(this);
@@ -43,10 +43,10 @@ void AddSubscriber_W::setupWidget() {
 }
 
 void AddSubscriber_W::handleAddSubButton() {
-    /*
-    Description:
-        Called when the subscriber button is clicked. Collects the text from the
-        LineEdit and sends it as a signal.  
+    /**
+     * DESCRIPTION:
+     *   Called when the subscriber button is clicked. Collects the text from the
+     *   LineEdit and sends it as a signal.  
     */
     QString add_sub = subscriber_name_entry->text();
     std::string subscriber_name = add_sub.toStdString();
