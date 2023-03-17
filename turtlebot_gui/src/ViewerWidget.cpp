@@ -22,7 +22,7 @@ Viewer_W::Viewer_W(QWidget* parent) :
     // initialize plot settings
     viewer_m->setRubberBand(QChartView::RectangleRubberBand);
     scatter_plot_m->legend()->setVisible(false);
-    // create the x and y axis 
+    // create the x and y axis
     haxis = new QValueAxis(this);
     vaxis = new QValueAxis(this);
 
