@@ -7,6 +7,7 @@
 #include <QHBoxLayout>
 #include <QPixmap>
 #include <QPushButton>
+#include <string>
 #include "StatusMsgTypes.h"
 
 

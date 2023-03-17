@@ -84,10 +84,8 @@ void Viewer_W::repaintScan() {
         addDataToSeries();
         // add the data to the plot
         scatter_plot_m->addSeries(scan_data_m);
-        ROS_INFO("created series");
         scan_data_m->attachAxis(haxis);
         scan_data_m->attachAxis(vaxis);
-        ROS_INFO("attached axes");
     } else {
         // update data in the plot
         scan_data_m->clear();
