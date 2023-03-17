@@ -19,7 +19,7 @@ class TopicStatus_W : public QWidget {
 
  public slots:
     void updateStatusMsg(msg_type&);
-    void updateTopicName(std::string&);
+   //  void updateTopicName(std::string&);
 
  signals:
     void unsubTrigger();
@@ -27,14 +27,14 @@ class TopicStatus_W : public QWidget {
  private:
     void setupWidget(void);
     void handleUnsubButton(void);
-    QLabel *info_msg;
-    QHBoxLayout *hlayout;
-    QLabel *curr_status_icon;
-    QPushButton *unsubscribe_btn;
+    QLabel *info_msg_m;
+    QHBoxLayout *hlayout_m;
+    QLabel *curr_status_icon_m;
+    QPushButton *unsubscribe_btn_m;
 
     int icon_height = 15;
 
-    QPixmap connected_icon = QPixmap(":/connected.png").scaledToHeight(icon_height);
-    QPixmap unresponsive_icon = QPixmap(":/unresponsive.png").scaledToHeight(icon_height);
-    QPixmap disconnected_icon = QPixmap(":/disconnected.png").scaledToHeight(icon_height);
+    QPixmap connected_icon_m = QPixmap(":/connected.png").scaledToHeight(icon_height);
+    QPixmap unresponsive_icon_m = QPixmap(":/unresponsive.png").scaledToHeight(icon_height);
+    QPixmap disconnected_icon_m = QPixmap(":/disconnected.png").scaledToHeight(icon_height);
 };

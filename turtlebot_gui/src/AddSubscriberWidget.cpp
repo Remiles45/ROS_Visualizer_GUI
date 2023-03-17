@@ -27,7 +27,7 @@ void AddSubscriber_W::setupWidget() {
     add_subscriber_btn_m = new QPushButton("Subscribe");
 
     // add widgets to the layout
-    hlayout_m->addWidget(subscriber_name_label_m);
+    hlayout_m->addWidget(subscriber_name_label);
     hlayout_m->addWidget(subscriber_name_entry_m);
     hlayout_m->addWidget(add_subscriber_btn_m);
     // stretch will automatically fill the excess space in the layout

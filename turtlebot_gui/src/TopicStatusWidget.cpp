@@ -11,12 +11,12 @@ TopicStatus_W::TopicStatus_W(QWidget *parent) : QWidget(parent) {
      * INPUTS: 
      *   QWidget *parent - parent widget (Main window)
     */
-    hlayout = new QHBoxLayout(this);
-    info_msg = new QLabel("");
-    unsubscribe_btn = new QPushButton("Disconnect");
+    hlayout_m = new QHBoxLayout(this);
+    info_msg_m = new QLabel("");
+    unsubscribe_btn_m = new QPushButton("Disconnect");
 
-    curr_status_icon = new QLabel();
-    curr_status_icon->setPixmap(disconnected_icon);
+    curr_status_icon_m = new QLabel();
+    curr_status_icon_m->setPixmap(disconnected_icon_m);
 
     setupWidget();
 }
@@ -27,14 +27,14 @@ void TopicStatus_W::setupWidget() {
      *   sets up the widget, handles adding items to the layout and setting
      *   any other settings that are desired.
     */
-    hlayout->addWidget(curr_status_icon);
-    hlayout->addWidget(info_msg);
-    hlayout->addStretch();
-    hlayout->addWidget(unsubscribe_btn);
+    hlayout_m->addWidget(curr_status_icon_m);
+    hlayout_m->addWidget(info_msg_m);
+    hlayout_m->addStretch();
+    hlayout_m->addWidget(unsubscribe_btn_m);
 
     // set up connects
     connect(
-        unsubscribe_btn,
+        unsubscribe_btn_m,
         &QPushButton::released,
         this,
         &TopicStatus_W::handleUnsubButton);
@@ -61,18 +61,18 @@ void TopicStatus_W::updateStatusMsg(msg_type& type) {
     switch (type) {
     case Connected:
         msg = "Topic Connected";
-        curr_status_icon->setPixmap(connected_icon);
+        curr_status_icon_m->setPixmap(connected_icon_m);
         break;
     case Disconnected:
         msg = "No Topics Connected";
-        curr_status_icon->setPixmap(disconnected_icon);
+        curr_status_icon_m->setPixmap(disconnected_icon_m);
         break;
     case Unresponsive:
         msg = "Displaying old data";
-        curr_status_icon->setPixmap(unresponsive_icon);
+        curr_status_icon_m->setPixmap(unresponsive_icon_m);
         break;
     case TryingToConnect:
-        msg = "Connecting to topic " + topic_name_m + "....";
+        msg = "Connecting to topic ....";
         break;
     default:
         msg = "";
