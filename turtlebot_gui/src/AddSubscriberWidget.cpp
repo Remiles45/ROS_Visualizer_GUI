@@ -18,25 +18,25 @@ void AddSubscriber_W::setupWidget() {
      *   Set up the widget. Add sub-widgets, place in layout and connect signals
     */
     // create layout
-    hLayout = new QHBoxLayout(this);
-    hLayout->setAlignment(Qt::AlignLeft);
+    hlayout_m = new QHBoxLayout(this);
+    hlayout_m->setAlignment(Qt::AlignLeft);
 
     // create widgets
     QLabel *subscriber_name_label = new QLabel("Laser Scan Topic: ");
-    subscriber_name_entry = new QLineEdit("base_scan");
-    add_subscriber_btn = new QPushButton("Subscribe");
+    subscriber_name_entry_m = new QLineEdit("base_scan");
+    add_subscriber_btn_m = new QPushButton("Subscribe");
 
     // add widgets to the layout
-    hLayout->addWidget(subscriber_name_label);
-    hLayout->addWidget(subscriber_name_entry);
-    hLayout->addWidget(add_subscriber_btn);
+    hlayout_m->addWidget(subscriber_name_label_m);
+    hlayout_m->addWidget(subscriber_name_entry_m);
+    hlayout_m->addWidget(add_subscriber_btn_m);
     // stretch will automatically fill the excess space in the layout
     // with a spacer.
-    hLayout->addStretch();
+    hlayout_m->addStretch();
 
     // set up connects
     connect(
-        add_subscriber_btn,
+        add_subscriber_btn_m,
         &QPushButton::released,
         this,
         &AddSubscriber_W::handleAddSubButton);
@@ -48,7 +48,7 @@ void AddSubscriber_W::handleAddSubButton() {
      *   Called when the subscriber button is clicked. Collects the text from the
      *   LineEdit and sends it as a signal.  
     */
-    QString add_sub = subscriber_name_entry->text();
+    QString add_sub = subscriber_name_entry_m->text();
     std::string subscriber_name = add_sub.toStdString();
     emit addSubSignal(subscriber_name);
 }

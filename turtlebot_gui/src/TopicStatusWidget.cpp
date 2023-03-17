@@ -72,11 +72,11 @@ void TopicStatus_W::updateStatusMsg(msg_type& type) {
         curr_status_icon->setPixmap(unresponsive_icon);
         break;
     case TryingToConnect:
-        msg = "Connecting to topic....";
+        msg = "Connecting to topic " + topic_name_m + "....";
         break;
     default:
         msg = "";
         break;
     }
-    info_msg->setText(msg);
+    info_msg_m->setText(msg);
 }
