@@ -66,7 +66,7 @@ Viewer_W::~Viewer_W() {
      *   and deletes pointers that are not QWidget children
     */
     repaint_timer_m->stop();
-    delete scatter_plot_m; //  not a QWidget child
+    delete scatter_plot_m;  // not a QWidget child
 }
 
 void Viewer_W::repaintScan() {
