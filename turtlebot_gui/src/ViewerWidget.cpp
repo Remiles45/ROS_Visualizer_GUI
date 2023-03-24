@@ -63,8 +63,10 @@ Viewer_W::~Viewer_W() {
     /**
      * DESCRIPTION:
      *   Destructor, shuts down timers. 
+     *   and deletes pointers that are not QWidget children
     */
     repaint_timer_m->stop();
+    delete scatter_plot_m; // not a QWidget child
 }
 
 void Viewer_W::repaintScan() {
@@ -78,7 +80,7 @@ void Viewer_W::repaintScan() {
     if (chart_series.isEmpty()) {
         // Create a scatter series in which we will store all of the datapoints that
         // the laser scan has collected.
-        scan_data_m = new QScatterSeries();
+        scan_data_m = new QScatterSeries(this);
         scan_data_m->setMarkerShape(QScatterSeries::MarkerShapeCircle);
         scan_data_m->setMarkerSize(marker_size_m);
         addDataToSeries();

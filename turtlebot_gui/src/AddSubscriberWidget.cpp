@@ -22,9 +22,9 @@ void AddSubscriber_W::setupWidget() {
     hlayout_m->setAlignment(Qt::AlignLeft);
 
     // create widgets
-    QLabel *subscriber_name_label = new QLabel("Laser Scan Topic: ");
-    subscriber_name_entry_m = new QLineEdit("base_scan");
-    add_subscriber_btn_m = new QPushButton("Subscribe");
+    QLabel *subscriber_name_label = new QLabel("Laser Scan Topic: ", this);
+    subscriber_name_entry_m = new QLineEdit("base_scan", this);
+    add_subscriber_btn_m = new QPushButton("Subscribe", this);
 
     // add widgets to the layout
     hlayout_m->addWidget(subscriber_name_label);
