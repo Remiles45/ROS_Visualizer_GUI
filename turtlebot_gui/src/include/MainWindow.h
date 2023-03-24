@@ -23,18 +23,12 @@ class MainWindow : public QMainWindow {
     ~MainWindow();
 
  private:
-    // std::unique_ptr is a smart pointer that owns and manages
-    // another object through a pointer and disposes of that
-    // object when the unique_ptr goes out of scope.
-    // std::unique_ptr<MainWindow> ui;
-    // void createActions();
-    // void createMenus();
     void createWidgets();
-
+    // window sizing
     int windowWidth;
     int windowHeight;
     QDesktopWidget *displayScreen;
-    QMenu *fileMenu;
+    // timer that spins ros
     QTimer *spinTimer = nullptr;
 
  protected:

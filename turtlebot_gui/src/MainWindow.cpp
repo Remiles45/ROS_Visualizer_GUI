@@ -45,8 +45,8 @@ void MainWindow::createWidgets() {
      * DESCRIPTION:
      *   set up main window, create sub widgets, set up layout, connect signals.
     */
-    QGridLayout *main_layout = new QGridLayout();
-    QWidget *main_widget = new QWidget();
+    QWidget *main_widget = new QWidget(this);
+    QGridLayout *main_layout = new QGridLayout(main_widget);
 
     // create widget objects.
     RosTranslation *ros_translation = new RosTranslation(nh_, this);

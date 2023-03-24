@@ -12,10 +12,10 @@ TopicStatus_W::TopicStatus_W(QWidget *parent) : QWidget(parent) {
      *   QWidget *parent - parent widget (Main window)
     */
     hlayout_m = new QHBoxLayout(this);
-    info_msg_m = new QLabel("");
-    unsubscribe_btn_m = new QPushButton("Disconnect");
+    info_msg_m = new QLabel("", this);
+    unsubscribe_btn_m = new QPushButton("Disconnect", this);
 
-    curr_status_icon_m = new QLabel();
+    curr_status_icon_m = new QLabel(this);
     curr_status_icon_m->setPixmap(disconnected_icon_m);
 
     setupWidget();

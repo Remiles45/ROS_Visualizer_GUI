@@ -150,10 +150,12 @@ void RosTranslation::unsubscribe() {
      *   shuts down and deletes the subscriber,
      *   shuts off the watchdog timer
     */
-    lscan_sub_m.shutdown();
-    subscriber_watchdog_m->stop();
-    subscriber_watchdog_m = nullptr;
-    curr_status = Disconnected;
+    if (curr_status != Disconnected) {
+        lscan_sub_m.shutdown();
+        subscriber_watchdog_m->stop();
+        subscriber_watchdog_m = nullptr;
+        curr_status = Disconnected;
+    }
 }
 
 void RosTranslation::reportStatus() {
